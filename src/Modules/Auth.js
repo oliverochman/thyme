@@ -6,21 +6,22 @@ const authenticate = async (username, password) => {
     console.log('login here')
     const path = apiUrl + 'version';
     let headers = {
-      "X-AUTH-USER": "susan_super",
-      "X-AUTH-TOKEN": "api_kitten"
-    };
-    try {
-      const response = axios.post(path, {username: username, password: password},
-      {
-        headers: headers
-      });
-      const {authenticate} = await response;
-			console.log(authenticate);
-      return {authenticated: true}
-    } catch (error) {
-      console.error(error);
-    }
+      "X-AUTH-USER": username,
+      "X-AUTH-TOKEN": password
+		};
 
+    try {
+      await axios.get(path,
+				{
+					headers: headers,
+					mode: 'cors'
+				}
+			);
+			sessionStorage.setItem('current_user', JSON.stringify({ username: username, password: password }));
+			return {authenticated: true}
+    } catch (error) {
+			return {authenticated: false}
+    }
 };
 
 export { authenticate }

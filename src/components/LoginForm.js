@@ -12,7 +12,7 @@ const LoginForm = (props) => {
         <label>Password</label>
         <input id="password" type="password" onChange={props.inputChangeHandler}></input>
       </div>
-      <button onClick={(e) => props.inputClickHandler(e)} type="submit">Sign in</button>
+      <button onClick={(e) => props.clickLogin(e)} type="submit">Sign in</button>
     </form>
   )
 }
