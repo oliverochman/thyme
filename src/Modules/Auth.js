@@ -6,8 +6,8 @@ const authenticate = async (username, password) => {
 	console.log('login here')
 	const path = apiUrl + 'version';
 	let headers = {
-		"X-AUTH-USER": "susan_super",
-		"X-AUTH-TOKEN": "api_kitten"
+		"X-AUTH-USER": username,
+		"X-AUTH-TOKEN": password
 	}
 
 	try {
@@ -19,7 +19,7 @@ const authenticate = async (username, password) => {
 		sessionStorage.setItem('current_user', JSON.stringify({ username: username, password: password }));
 		return { authenticated: true }
 	} catch (error) {
-		return { authenticated: false }
+		return error
 	}
 };
 
