@@ -12,6 +12,33 @@ describe("User can create time recording", () => {
 				"X-AUTH-TOKEN": "api_kitten"
 			}
 		});
+		cy.route({
+			method: "GET",
+			url: "https://demo-stable.kimai.org/api/customers?visible=1",
+			response: "fixtures:customer_index.json",
+			headers: {
+				"X-AUTH-USER": "susan_super",
+				"X-AUTH-TOKEN": "api_kitten"
+			}
+		});
+		cy.route({
+			method: "GET",
+			url: "https://demo-stable.kimai.org/api/activities?visible=1",
+			response: "fixtures:activities_index.json",
+			headers: {
+				"X-AUTH-USER": "susan_super",
+				"X-AUTH-TOKEN": "api_kitten"
+			}
+		});
+		cy.route({
+			method: "GET",
+			url: "https://demo-stable.kimai.org/api/projects?visible=1",
+			response: "fixtures:projects_index.json",
+			headers: {
+				"X-AUTH-USER": "susan_super",
+				"X-AUTH-TOKEN": "api_kitten"
+			}
+		});
 		cy.visit("http://localhost:3000");
 		cy.get("input[type=name]").type("anna_admin");
 		cy.get("input[type=password]").type("api_kitten");

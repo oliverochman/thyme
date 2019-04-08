@@ -12,6 +12,7 @@ const saveTime = async (begin, end, customer, project, activity) => {
 		Accept: "application/json",
 		"Content-Type": "application/json"
 	};
+	debugger;
 	try {
 		const response = await axios.post(
 			proxyUrl + apiUrl + "timesheets",
