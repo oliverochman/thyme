@@ -1,23 +1,23 @@
 /// <reference types="Cypress" />
 
 describe("User can view history of time recordings", () => {
-	it("successfully displays a list of work history over the last 7 days ", () => {
+	it("successfully displays a list of work history", () => {
 		cy.server();
 		cy.route({
 			method: "GET",
 			url: "https://demo-stable.kimai.org/api/timesheets",
 			response: "fixtures:get_data.json",
 			headers: {
-				"X-AUTH-USER": "susan_super",
+				"X-AUTH-USER": "john_user",
 				"X-AUTH-TOKEN": "api_kitten"
 			}
 		});
 		cy.route({
 			method: "GET",
-			url: "https://demo-stable.kimai.org/api/projects/{id}",
+			url: "https://demo-stable.kimai.org/api/projects/1",
 			response: "fixtures:get_specific_project_name.json",
 			headers: {
-				"X-AUTH-USER": "susan_super",
+				"X-AUTH-USER": "john_user",
 				"X-AUTH-TOKEN": "api_kitten"
 			}
 		});
@@ -30,8 +30,8 @@ describe("User can view history of time recordings", () => {
 		cy.contains("DURATION");
 		cy.contains("PROJECT");
 		cy.contains("ACTIVITY");
+		cy.contains("")
 
-		cy.route('GET', 'projects/*', 'get_specific_project_name.json')
 	});
 });
 

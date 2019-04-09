@@ -10,8 +10,8 @@
     "hourly_rate": 0,
     "exported": true,
     "activity": 0,
-    "project": 0,
-    "user": 0
+    "project": 186,
+    "user": 1
 	},
 	{
 		"id": 2989,
@@ -30,7 +30,7 @@
 		"duration": 60,
 		"rate": 0.82,
 		"activity": 1371,
-		"project": 110,
+		"project": 186,
 		"user": 6
 },
 {
@@ -51,7 +51,7 @@
 		"rate": 426.3,
 		"description": "Dicta voluptate nulla voluptatem ex. A omnis rerum sed sed id quas. Dignissimos quidem porro quia odit qui dolor provident qui. Et ut dolores voluptate explicabo amet dolor.",
 		"activity": 3226,
-		"project": 220,
+		"project": 186,
 		"user": 6
 },
 {
@@ -61,7 +61,7 @@
 		"duration": 5460,
 		"rate": 74.32,
 		"activity": 1602,
-		"project": 126,
+		"project": 186,
 		"user": 6
 },
 {
@@ -71,7 +71,7 @@
 		"duration": 8640,
 		"rate": 117.6,
 		"activity": 2609,
-		"project": 207,
+		"project": 186,
 		"user": 6
 },
 {
@@ -81,7 +81,7 @@
 		"duration": 37740,
 		"rate": 513.68,
 		"activity": 1371,
-		"project": 110,
+		"project": 186,
 		"user": 6
 }
 

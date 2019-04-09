@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import { getData } from '../modules/getData';
-import { getSpecificProjectName } from '../modules/getSpecificProjectName';
+import { getTimesheets } from '../modules/getData';
+import { getProjects } from '../modules/getProjects'
+import { getActivities } from '../modules/getActivities'
+
 import ViewTimeForm from './ViewTimeForm'
 
 class ViewTimeRecording extends Component {
@@ -11,32 +13,44 @@ class ViewTimeRecording extends Component {
 		customer: '',
 		project: '',
 		activity: '',
-		errorMessage: '',
-		projectName: null
+		errorMessage: ''
 	}
 
 	componentDidMount() {
 		this.getTimesheets();
-		this.getProjectName();
+	}
+
+	async magic(unFilteredTimesheets, unFilteredProjects, unFilteredActivities) {
+		debugger;
+
+		const projectsFiltered = unFilteredTimesheets.map(time => {
+			unFilteredProjects.filter(projects => {
+					if (time.project === projects.id) {
+							time.project = projects.name
+					}
+			})
+			return time
+		})
+		const activitiesFiltered = projectsFiltered.map(time => {
+			unFilteredActivities.filter(activities => {
+					if (time.activity === activities.id) {
+							time.activity = activities.name
+					}
+			})
+			return time
+		})
+		return activitiesFiltered
 	}
 
 	async getTimesheets() {
-		const response = await getData();
-		if (response.status === 200) {
+		const projects = await getProjects();
+		const activities = await getActivities();
+		const timesheets = await getTimesheets();
+		if (timesheets.status === 200 && projects.status ===  200 && activities.status ===  200) {
+			const processedTimesheets = await this.magic(timesheets.data, projects.data, activities.data)
 			this.setState({
-				timesheets: response.data,
-			})
-		} else {
-			console.log("response error")
-		}
-	}
-
-	async getProjectName() {
-		const resp = await getSpecificProjectName();
-		if (resp.status === 200) {
-			this.setState({
-				projectName: resp.data,
-			})
+				timesheets: processedTimesheets
+			});
 		} else {
 			console.log("response error")
 		}
@@ -44,14 +58,12 @@ class ViewTimeRecording extends Component {
 
 	render() {
 		let timesheets = this.state.timesheets
-		let projectName = this.state.projectName
 		let fetchData
-		if (timesheets != null && projectName != null) {
+		if (timesheets != null) {
 			fetchData = (
 				<div>
 					<ViewTimeForm
-					timesheets={this.state.timesheets}
-					projectName={this.state.projectName}
+						timesheets={this.state.timesheets}
 					/>
 				</div>
 			)
@@ -59,7 +71,6 @@ class ViewTimeRecording extends Component {
 			console.log("error")
 		}
 
-		console.log(fetchData)
 		return (
 			<div>
 				<h1 className="timeHistoryTitle">My Activity History</h1>
