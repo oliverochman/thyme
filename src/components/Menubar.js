@@ -3,7 +3,8 @@ import { Button, Grid, Menu, Sidebar, Segment } from "semantic-ui-react";
 import { IoIosMenu } from "react-icons/io";
 import logo from "../image/image.png";
 import SaveTimeRecording from "./SaveTimeRecording";
-import ViewTimeRecording from './ViewTimeRecording'
+import ViewTimeRecording from "./ViewTimeRecording";
+import { Link } from "react-router-dom";
 
 class Menubar extends Component {
 	constructor(props) {
@@ -21,11 +22,9 @@ class Menubar extends Component {
 
 		return (
 			<Grid columns={2} style={{ background: "#354152" }}>
-				<Grid.Column
-					style={{ background: "#5bb695", width: "60px" }}
-				>
+				<Grid.Column style={{ background: "#5bb695", width: "60px" }}>
 					<Button
-						id='menuicon'
+						id="menuicon"
 						disabled={visible}
 						onClick={this.handleShowClick}
 						style={{ background: "#5bb695", padding: 0, marginLeft: 7 }}
@@ -60,12 +59,14 @@ class Menubar extends Component {
 						/>
 					</div>
 
-					<p id="login_message" style={{ color: '#354151', textAlign: 'center' }}>
+					<p
+						id="login_message"
+						style={{ color: "#354151", textAlign: "center" }}
+					>
 						Welcome, {this.props.user.toUpperCase()}
 					</p>
 					<Menu.Item
 						className="item"
-						as="a"
 						style={{
 							background: "#dbdbdf",
 							marginBottom: "10px",
@@ -73,7 +74,9 @@ class Menubar extends Component {
 							marginLeft: "10%"
 						}}
 					>
-						Tab1
+						<Link id="dashboard" to={{pathname: "/Dashboard"}}>
+							Dashboard
+						</Link>
 					</Menu.Item>
 					<Menu.Item
 						as="a"
@@ -120,12 +123,12 @@ class Menubar extends Component {
 						Tab5
 					</Menu.Item>
 				</Sidebar>
-				<div >
+				<div>
 					<Segment basic>
 						<SaveTimeRecording />
 					</Segment>
 				</div>
-				<div style={{ paddingTop: '70px', margin: 'auto' }}>
+				<div style={{ paddingTop: "70px", margin: "auto" }}>
 					<Segment basic>
 						<ViewTimeRecording />
 					</Segment>
