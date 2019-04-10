@@ -34,7 +34,6 @@ const fetchProjects = async () => {
 			headers: headers,
 			mode: "cors"
 		});
-
 		return response.data;
 	} catch (error) {
 		console.log(error);
@@ -55,7 +54,6 @@ const fetchActivities = async () => {
 			headers: headers,
 			mode: "cors"
 		});
-
 		return response.data;
 	} catch (error) {
 		console.log(error);

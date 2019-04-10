@@ -5,54 +5,59 @@ describe("User can create time recording", () => {
 		cy.server();
 		cy.route({
 			method: "POST",
-			url: "https://demo-stable.kimai.org/api/timesheets",
-			response: "fixtures:save_data.json",
+			url: "https://demo.kimai.org/api/timesheets",
+			response: "fixture:successfully_saving_data.json",
 			headers: {
 				"X-AUTH-USER": "susan_super",
 				"X-AUTH-TOKEN": "api_kitten"
-			}
+			},
+			status: 200
 		});
+
 		cy.route({
 			method: "GET",
-			url: "https://demo-stable.kimai.org/api/customers?visible=1",
-			response: "fixtures:customer_index.json",
+			url: "https://demo.kimai.org/api/customers",
+			response: "fixture:customer_index.json",
 			headers: {
 				"X-AUTH-USER": "susan_super",
 				"X-AUTH-TOKEN": "api_kitten"
 			}
-		});
+		}).as('getCustomers');
+
 		cy.route({
 			method: "GET",
-			url: "https://demo-stable.kimai.org/api/activities?visible=1",
-			response: "fixtures:activities_index.json",
+			url: "https://demo.kimai.org/api/activities",
+			response: "fixture:activities_index.json",
 			headers: {
 				"X-AUTH-USER": "susan_super",
 				"X-AUTH-TOKEN": "api_kitten"
 			}
-		});
+		}).as('getActivities');
+
 		cy.route({
 			method: "GET",
-			url: "https://demo-stable.kimai.org/api/projects?visible=1",
-			response: "fixtures:projects_index.json",
+			url: "https://demo.kimai.org/api/projects",
+			response: "fixture:projects_index.json",
 			headers: {
 				"X-AUTH-USER": "susan_super",
 				"X-AUTH-TOKEN": "api_kitten"
 			}
-		});
+		}).as('getProjects');
+
 		cy.visit("http://localhost:3000");
 		cy.get("input[type=name]").type("anna_admin");
 		cy.get("input[type=password]").type("api_kitten");
 		cy.get("button[type=submit]").click();
 		cy.get("#customer > .dropdown").click();
-		cy.contains("Cummings, Watsica and Hauck").click();
+		cy.get(".visible > .selected > .text").click();
 		cy.get("#projects > .dropdown").click();
-		cy.contains("Adaptive user-facing info-mediaries").click();
-		// cy.get("#activity > .dropdown").click();
-		// cy.contains("benchmark clicks-and-mortar eyeballs").click();
+		cy.get(".visible > .selected > .text").click();
+		cy.get("#activity > .dropdown").click();
+		cy.get(".visible > .selected > .text").click();
 		cy.get('input[name="begin"]').type("07:00");
 		cy.get('input[name="end"]').type("08:00");
 		cy.get('input[name="rate"]').type("25", {force: true});
-		cy.get('input[name="description"]');
+		cy.get('input[name="description"]').type("I worked really hard on this");
 		cy.get('button[name="create"]').click();
 		cy.get('p[name="save-message"]').should("contain", "Your time was saved");
 	});

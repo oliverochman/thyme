@@ -8,6 +8,7 @@ import {
 	fetchActivities
 } from "../modules/timeData";
 
+
 class SaveTimeRecording extends Component {
 	constructor(props) {
 		super(props);
@@ -65,28 +66,24 @@ class SaveTimeRecording extends Component {
 	onChange(event) {
 		this.setState({
 			[event.target.name]: event.target.value,
-			timeSaved: false
+			timeSaved: false,
+			errorMessage: ''
 		});
 	}
 
 	handleCustomerChange(option) {
-		this.setState({ customer: option }, async () => {
-			const filteredProjects = await this.state.projects.filter(val => {
-				return val.customer === option;
-			});
-			this.setState({ showProjectsDropdown: true, projects: filteredProjects });
+		this.setState({
+			customer: option,
+			errorMessage: '',
+			timeSaved: false
 		});
 	}
 
 	handleProjectChange(option) {
-		this.setState({ project: option }, async () => {
-			const filteredActivities = await this.state.activities.filter(val => {
-				return val.project === option;
-			});
-			this.setState({
-				showActivitiesDropdown: true,
-				activities: filteredActivities
-			});
+		this.setState({
+			project: option,
+			errorMessage: '',
+			timeSaved: false
 		});
 	}
 
@@ -94,42 +91,32 @@ class SaveTimeRecording extends Component {
 		this.setState({ activity: option });
 	}
 
+	magic() {
+		if (this.state.customer != '') {
+			const filtered = this.state.projects.filter(val => {
+				return val.customer === this.state.customer
+			});
+			return filtered.map(val => {
+				return { text: val.name, value: val.id };
+			});
+		} else {
+			return this.state.projects
+		}
+	}
+
 	render() {
 		let saveButton;
-		let projectsDropdown;
-		let activitiesDropdown;
-		const customers = this.state.customers.map(val => {
-			return { text: val.name, value: val.id };
-		});
+
+		const	customers = this.state.customers.map(val => {
+				return { text: val.name, value: val.id };
+			});
+
 		const projects = this.state.projects.map(val => {
 			return { text: val.name, value: val.id };
 		});
 		const activities = this.state.activities.map(val => {
 			return { text: val.name, value: val.id };
 		});
-
-		if (this.state.showProjectsDropdown === true) {
-			projectsDropdown = (
-				<Dropdown
-					options={projects}
-					placeholder="Project"
-					id="projects"
-					selection
-					onChange={(e, { value }) => this.handleProjectChange(value)}
-				/>
-			);
-		}
-		if (this.state.showActivitiesDropdown === true) {
-			activitiesDropdown = (
-				<Dropdown
-					options={activities}
-					placeholder="Activity"
-					id="activity"
-					selection
-					onChange={(e, { value }) => this.handleActivityChange(value)}
-				/>
-			);
-		}
 
 		if (!this.state.timeSaved) {
 			saveButton = (
@@ -175,10 +162,26 @@ class SaveTimeRecording extends Component {
 						</Segment>
 					</Grid.Column>
 					<Grid.Column>
-						<Segment>{projectsDropdown}</Segment>
+						<Segment>
+							<Dropdown
+								options={ this.magic() }
+								placeholder="Project"
+								id="projects"
+								selection
+								onChange={(e, { value }) => this.handleProjectChange(value)}
+							/>
+						</Segment>
 					</Grid.Column>
 					<Grid.Column>
-						<Segment>{activitiesDropdown}</Segment>
+						<Segment>
+							<Dropdown
+								options={activities}
+								placeholder="Activity"
+								id="activity"
+								selection
+								onChange={(e, { value }) => this.handleActivityChange(value)}
+							/>
+						</Segment>
 					</Grid.Column>
 					<Grid.Column>
 						<Segment>

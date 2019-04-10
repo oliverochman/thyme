@@ -1,5 +1,5 @@
 import axios from "axios";
-import moment from "moment";
+import moment from "moment-timezone";
 
 const saveTime = async (begin, end, customer, project, activity, rate, description) => {
 	const apiUrl = "https://demo.kimai.org/api/";
