@@ -12,6 +12,27 @@
 							"X-AUTH-TOKEN": "api_kitten"
 					}
 			});
+
+			cy.route({
+				method: 'GET',
+				url: 'https://demo.kimai.org/api/version',
+				response: 'fixture:successful_login.json',
+				headers: {
+					"X-AUTH-USER": "anna_admin",
+					"X-AUTH-TOKEN": "api_kitten"
+				}
+			})
+
+			cy.route({
+				method: "GET",
+				url: "https://demo.kimai.org/api/customers",
+				response: "fixture:customer_index.json",
+				headers: {
+					"X-AUTH-USER": "susan_super",
+					"X-AUTH-TOKEN": "api_kitten"
+				}
+			});
+
 			cy.route({
 					method: "GET",
 					url: "https://demo.kimai.org/api/projects?visible=3",

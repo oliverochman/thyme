@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { getTimesheets } from '../modules/getData';
-import { getProjects } from '../modules/getProjects'
-import { getActivities } from '../modules/getActivities'
+import {
+	fetchProjects,
+	fetchActivities
+} from "../modules/timeData";
 
 import ViewTimeForm from './ViewTimeForm'
 
@@ -42,8 +44,8 @@ class ViewTimeRecording extends Component {
 	}
 
 	async getTimesheets() {
-		const projects = await getProjects();
-		const activities = await getActivities();
+		const projects = await fetchProjects();
+		const activities = await fetchActivities();
 		const timesheets = await getTimesheets();
 		if (timesheets.status === 200 && projects.status ===  200 && activities.status ===  200) {
 			const processedTimesheets = await this.matchApi(timesheets.data, projects.data, activities.data)
