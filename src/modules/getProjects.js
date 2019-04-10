@@ -11,7 +11,6 @@ const getProjects= async () => {
 		"X-AUTH-USER": user,
 		"X-AUTH-TOKEN": password,
 	};
-debugger;
 	try {
 		const resp = await axios.get(path, {
 			headers: headers,

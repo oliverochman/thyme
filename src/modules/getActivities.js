@@ -17,7 +17,6 @@ const getActivities= async () => {
 			headers: headers,
 			mode: "cors"
 		});
-		debugger;
 		return resp;
 	} catch (error) {
 		return error;
