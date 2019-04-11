@@ -116,3 +116,7 @@ code {
 	left: 1175x;
 	padding-left: 680px;
 }
+
+.chart-data {
+  height: 60vh;
+}
