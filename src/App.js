@@ -2,12 +2,16 @@ import React, { Component } from 'react'
 import Menubar from './components/Menubar'
 import LoginLogic from './components/LoginLogic'
 
+
 class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			authenticated: false
 		}
+	}
+	componentDidMount() {
+
 	}
 
 	userAuthenticated() {

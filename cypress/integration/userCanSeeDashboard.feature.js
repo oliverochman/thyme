@@ -17,7 +17,7 @@
 			 cy.get("input[type=password]").type("api_kitten");
 			 cy.get("button[type=submit]").click();
 			 cy.get("Button[id=menuicon]").click("topLeft", { force: true });
-			 cy.get("dashboard").should("contain", "Dashboard");
+			 cy.get("#dashboard").should("contain", "Dashboard");
 			 cy.visit("/dashboard");
 			 cy.get('chart[type="graph-customer"]');
 	 });
