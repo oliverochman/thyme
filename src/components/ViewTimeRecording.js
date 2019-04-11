@@ -82,4 +82,3 @@ class ViewTimeRecording extends Component {
 }
 
 export default ViewTimeRecording
-
