@@ -1,36 +1,51 @@
-import React, {Component} from 'react';
-import { Line } from 'react-chartjs-2';
+import React, { Component } from "react";
+import { Line } from "react-chartjs-2";
+import { getTimesheets } from "../modules/getData";
+import { fetchProjects } from "../modules/timeData";
 
 class DashboardChart extends Component {
+	constructor(props) {
+		super(props);
+		// this.postTimesheets = this.postTimesheets.bind(this);
+		this.state = {
+			begin: "",
+			end: "",
+			projects: [],
+			data: []
+		};
+	}
+
+	componentDidMount() {
+		this.getTimesheets();
+	}
+
+	async getTimesheets() {
+		const projects = await fetchProjects();
+	}
+
 	render() {
+		debugger;
 		const data = {
-			labels: [
-        '10/04/2018', '10/05/2018',
-        '10/06/2018', '10/07/2018',
-        '10/08/2018', '10/09/2018',
-        '10/10/2018', '10/11/2018',
-        '10/12/2018', '10/13/2018',
-        '10/14/2018', '10/15/2018'
-			],
+			labels: ["Project 1", "Project 2", "Project 3"],
 			datasets: [
-        {
-          label: 'Temperature',
-          data: [22,19,27,23,22,24,17,25,23,24,20,19],
-          fill: false,
-          borderColor: 'green'
-        }
-      ]
-		}
+				{
+					label: "Projects",
+					data: [this.state.projects],
+					fill: false,
+					borderColor: "green"
+				}
+			]
+		};
 
 		const options = {
-      maintainAspectRatio: false
-		}
+			maintainAspectRatio: false
+		};
 
 		return (
 			<div>
-				<h1>It works</h1>
+				<h1>Dashboard </h1>
 				<div className="chart-data">
-				<Line data={data} options={options}/>
+					<Line data={data} options={options} />
 				</div>
 			</div>
 		);
