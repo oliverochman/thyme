@@ -31,10 +31,11 @@ class LoginLogic extends Component {
 					{this.state.errorMessage}
 				</p>
 
-				<LoginForm
-					inputChangeHandler={this.onChange.bind(this)}
-					clickLogin={this.onLogin.bind(this)}
-				/>
+
+					<LoginForm
+						inputChangeHandler={this.onChange.bind(this)}
+						clickLogin={this.onLogin.bind(this)}
+					/>
 			</>
 		)
 	}

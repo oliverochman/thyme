@@ -18,7 +18,7 @@
 			 cy.get("button[type=submit]").click();
 			 cy.get("Button[id=menuicon]").click("topLeft", { force: true });
 			 cy.get("#dashboard").should("contain", "Dashboard");
-			 cy.visit("/dashboard");
-			 cy.get('chart[type="graph-customer"]');
+			 cy.visit("http://localhost:3000/Dashboard");
+			 cy.get('.chartjs-render-monitor');
 	 });
  });

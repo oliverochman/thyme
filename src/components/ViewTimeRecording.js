@@ -81,5 +81,4 @@ class ViewTimeRecording extends Component {
 	}
 }
 
-export default { ViewTimeRecording }
-
+export default ViewTimeRecording
