@@ -128,6 +128,11 @@ var timeSheetsForUser = timesheets.filter(timesheet => {
 	return timesheet.user === 6
 })
 
+projectsForUser = timeSheetsForUser.filter(project_date => {
+	return project_date.end <= new Date().setDate(new Date().getDate()-2)
+})
+
+
 
 var projects = [
   { name: "Project 1", begin: "2018-04-18 07:00" },

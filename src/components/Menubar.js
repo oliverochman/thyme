@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Button, Grid, Menu, Sidebar, Segment } from "semantic-ui-react";
+import { Button, Grid, Menu, Sidebar } from "semantic-ui-react";
 import { IoIosMenu } from "react-icons/io";
 import logo from "../image/image.png";
+import { Link } from "react-router-dom";
 
 class Menubar extends Component {
 	constructor(props) {
