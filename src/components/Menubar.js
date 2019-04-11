@@ -66,7 +66,7 @@ class Menubar extends Component {
 							marginLeft: "10%"
 						}}
 					>
-						<Link id="dashboard" to={{pathname: "/Dashboard"}}>
+						<Link id="dashboard" to={{pathname: "/dashboard"}}>
 							Dashboard
 						</Link>
 					</Menu.Item>

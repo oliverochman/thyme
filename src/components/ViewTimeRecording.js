@@ -49,6 +49,7 @@ class ViewTimeRecording extends Component {
 		const timesheets = await getTimesheets();
 		if (timesheets.status === 200 && projects.status ===  200 && activities.status ===  200) {
 			const processedTimesheets = await this.matchApi(timesheets.data, projects.data, activities.data)
+
 			this.setState({
 				timesheets: processedTimesheets
 			});
